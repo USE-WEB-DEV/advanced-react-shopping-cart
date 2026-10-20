@@ -9,7 +9,7 @@ import {
 } from "react";
 import { useImmerReducer } from "use-immer";
 
-type ShelfProduct = {
+export type ShelfProduct = {
   id: number;
   name: string;
   price: number;

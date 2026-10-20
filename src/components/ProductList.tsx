@@ -1,12 +1,12 @@
 import { ShoppingCartPlusIcon } from "lucide-react";
 import { memo } from "react";
-import { useCart } from "../contexts/CartContext";
+import { type ShelfProduct, useCart } from "../contexts/CartContext";
 import formatCurrency from "../utilities/currency-formater";
 
-const products = [
-  { id: 1, name: "Keyboard", price: 25000 },
-  { id: 2, name: "Mouse", price: 1200 },
-  { id: 3, name: "Monitor", price: 18000 },
+const products: ShelfProduct[] = [
+  { id: 1, name: "Keyboard", price: 25000, quantity: 0 },
+  { id: 2, name: "Mouse", price: 1200, quantity: 0 },
+  { id: 3, name: "Monitor", price: 18000, quantity: 0 },
 ];
 
 const primaryCTA =
@@ -53,7 +53,9 @@ export const ProductList = memo(function ProductList() {
                 <div className="grid place-content-center place-self-stretch border-b border-b-(--border) pr-4 pl-2">
                   <button
                     className={`${primaryCTA}`}
-                    onClick={() => cartDispatch({ type: "add", payload: product })}
+                    onClick={() =>
+                      cartDispatch({ type: "add", payload: product })
+                    }
                     type="button"
                   >
                     <ShoppingCartPlusIcon size={18} />
