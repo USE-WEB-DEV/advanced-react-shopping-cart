@@ -3,9 +3,9 @@ import { useCart } from "../contexts/CartContext";
 import formatCurrency from "../utilities/currency-formater";
 
 export default function Cart() {
-  const { state, dispatch } = useCart();
+  const { cart, cartDispatch } = useCart();
 
-  const total = state.items.reduce((sum, item) => {
+  const total = cart.items.reduce((sum, item) => {
     if (item.quantity) {
       return sum + item.price * item.quantity;
     } else {
@@ -19,7 +19,7 @@ export default function Cart() {
       id="shopping-cart"
     >
       <h2 className="text-center">Shopping Cart</h2>
-      {state.items.length === 0 ? (
+      {cart.items.length === 0 ? (
         <p className="animate-pulse text-center">Your Cart is empty</p>
       ) : (
         <div className="grid-wrapper max-w-lg">
@@ -32,13 +32,13 @@ export default function Cart() {
                 Price($)
               </span>
               <span className="flex justify-self-center pr-2 pl-2 font-bold">
-                Quantity
+                Qty
               </span>
               <span></span>
               <span></span>
               <span className="pr-4"></span>
             </div>
-            {state.items.map((item) => (
+            {cart.items.map((item) => (
               <div
                 className="contents *:place-self-stretch *:border-b *:border-b-(--border) *:py-4"
                 key={item.id}
@@ -57,7 +57,7 @@ export default function Cart() {
                   className="grid place-items-center pr-2 pl-2 disabled:pointer-events-none disabled:invisible"
                   disabled={item.quantity <= 0}
                   onClick={() =>
-                    dispatch({ type: "decrement", payload: item.id })
+                    cartDispatch({ type: "decrement", payload: item.id })
                   }
                   type="button"
                 >
@@ -69,7 +69,7 @@ export default function Cart() {
                 >
                   <Plus
                     onClick={() =>
-                      dispatch({ type: "increment", payload: item.id })
+                      cartDispatch({ type: "increment", payload: item.id })
                     }
                   />
                 </button>
@@ -80,7 +80,7 @@ export default function Cart() {
                   {" "}
                   <Trash2
                     onClick={() =>
-                      dispatch({ type: "remove", payload: item.id })
+                      cartDispatch({ type: "remove", payload: item.id })
                     }
                     size={18}
                   />
@@ -102,16 +102,16 @@ export default function Cart() {
 
       <div className="cta-section flex flex-row-reverse gap-4">
         <button
-          className="shadow-0 flex flex-1 items-center justify-center gap-2 rounded-xs bg-emerald-600 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-emerald-700 active:scale-[0.98]"
-          onClick={() => dispatch({ type: "clear" })}
+          className="shadow-0 focus-visible:ring-ring inline-flex flex-1 items-center justify-center gap-2 rounded-xs bg-emerald-600 px-6 py-3 text-sm font-semibold whitespace-nowrap text-white transition-all hover:bg-emerald-700 focus-visible:ring-1 focus-visible:outline-none active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0"
+          onClick={() => cartDispatch({ type: "clear" })}
           type="button"
         >
           <ShoppingCart />
           <span>Checkout</span>
         </button>
         <button
-          className="flex scale-90 items-center justify-center gap-2 rounded-sm border border-gray-200/50 px-4 py-3 text-sm font-medium text-gray-600 transition-all hover:border-red-200 hover:bg-red-50 hover:text-red-600"
-          onClick={() => dispatch({ type: "clear" })}
+          className="focus-visible:ring-ring inline-flex scale-90 items-center justify-center gap-2 rounded-sm border border-gray-200/50 px-4 py-3 text-sm font-medium whitespace-nowrap text-gray-600 transition-all hover:border-red-200 hover:bg-red-50 hover:text-red-600 focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none"
+          onClick={() => cartDispatch({ type: "clear" })}
           title="Clear all items from cart"
           type="button"
         >

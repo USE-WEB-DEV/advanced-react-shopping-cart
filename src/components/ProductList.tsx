@@ -10,17 +10,19 @@ const products = [
 ];
 
 const primaryCTA =
-  "inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-sm text-sm font-bold font-[poppins] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-emerald-600 text-emerald-50 shadow hover:bg-emerald-600/90 dark:bg-emerald-300/60 dark:hover:bg-emerald-500/90 h-9 px-2 py-2";
+  "inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-sm text-sm font-bold font-[poppins] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-emerald-600 text-emerald-50 shadow hover:bg-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-700 h-9 px-2 py-2";
 
 export const ProductList = memo(function ProductList() {
-  const { dispatch } = useCart();
+  const { cartDispatch } = useCart();
   const spanStyle = "place-items-center grid grid-col-1 ";
   return (
     <section
       className="mx-auto grid max-w-lg gap-4 px-4 md:px-6"
       id="product-list"
     >
-      <h2 className="text-center font-[poppins] tracking-widest">Products in Stock</h2>
+      <h2 className="text-center font-[poppins] tracking-widest">
+        Products in Stock
+      </h2>
       <div className="grid-wrapper grid max-w-lg scrollbar-none grid-cols-1 place-content-center-safe overflow-auto rounded-xl border border-(--border)">
         <div className="grid grid-cols-[repeat(3,auto)] gap-y-0">
           <div className="contents *:place-self-stretch *:bg-neutral-200/20 *:py-4 *:text-neutral-300">
@@ -51,7 +53,7 @@ export const ProductList = memo(function ProductList() {
                 <div className="grid place-content-center place-self-stretch border-b border-b-(--border) pr-4 pl-2">
                   <button
                     className={`${primaryCTA}`}
-                    onClick={() => dispatch({ type: "add", payload: product })}
+                    onClick={() => cartDispatch({ type: "add", payload: product })}
                     type="button"
                   >
                     <ShoppingCartPlusIcon size={18} />

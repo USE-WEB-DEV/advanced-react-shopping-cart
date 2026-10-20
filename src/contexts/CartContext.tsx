@@ -1,118 +1,113 @@
 /* This file contains the entire cart state-management layer */
 
 import {
-	type ActionDispatch,
-	createContext,
-	type ReactNode,
-	useContext,
-	useReducer,
+  type ActionDispatch,
+  createContext,
+  type ReactNode,
+  useContext,
+  
 } from "react";
+import { useImmerReducer } from "use-immer";
 
-type CartProduct = {
-	id: number;
-	name: string;
-	price: number;
-	quantity: number;
+type ShelfProduct = {
+  id: number;
+  name: string;
+  price: number;
+  quantity: 0;
 };
-type Product = Omit<CartProduct, "quantity">;
+// type Product = Omit<CartProduct, "quantity">;
+type CartProduct = {
+  [P in keyof ShelfProduct]: P extends "quantity" ? number : ShelfProduct[P];
+};
 type CartState = {
-	items: CartProduct[];
+  items: CartProduct[];
 };
 
 type CartActions =
-	| {
-			type: "add";
-			payload: Product;
-	  }
-	| { type: "increment"; payload: number }
-	| { type: "decrement"; payload: number }
-	| { type: "remove"; payload: number }
-	| { type: "clear" };
+  | {
+      type: "add";
+      payload: ShelfProduct;
+    }
+  | { type: "increment"; payload: number }
+  | { type: "decrement"; payload: number }
+  | { type: "remove"; payload: number }
+  | { type: "clear" };
 
-const initialState: CartState = { items: [] };
+const initialCart: CartState = { items: [] };
 
-function cartReducer(state: CartState, action: CartActions) {
-	switch (action.type) {
-		case "add": {
-			const product = action.payload;
+function cartReducer(draft: CartState, action: CartActions) {
+  switch (action.type) {
+    case "add": {
+      const product = action.payload;
 
-			const existingItem = state.items.find((item) => item.id === product.id);
+      // check if item is already in the cart
+      const foundItem = draft.items.find((item) => item.id === product.id);
 
-			// if item is already in the cart
-			if (existingItem) {
-				return {
-					// return a new state object, don't mutate the state!
-					...state,
-					items: state.items.map((item) =>
-						item.id === product.id
-							? { ...item, quantity: item.quantity++ }
-							: item,
-					),
-				};
-			} else {
-				// if item is not inside the cart; add it:
-				return {
-					...state,
-					items: [...state.items, { ...product, quantity: 1 }],
-				};
-			}
-		}
-		case "increment": {
-			return {
-				...state,
-				items: state.items.map((item) =>
-					item.id === action.payload
-						? { ...item, quantity: item.quantity++ }
-						: item,
-				),
-			};
-		}
-		case "decrement": {
-			return {
-				...state,
-				items: state.items.map((item) =>
-					item.id === action.payload
-						? { ...item, quantity: item.quantity-- }
-						: item,
-				),
-			};
-		}
-		case "remove": {
-			return {
-				...state,
-				items: state.items.filter((item) => item.id !== action.payload),
-			};
-		}
-		case "clear": {
-			return initialState;
-		}
-		default: {
-			const _exhaustiveCheck: never = action;
-			throw new Error(`Action_type: "${action.type}" is not yet implemented!`);
-		}
-	}
+      // case: item's kind already in cart
+      if (foundItem) {
+        foundItem.quantity++;
+        break;
+      } else {
+        // case: item's not in the cart
+
+        draft.items.push({ ...product, quantity: 1 });
+        break;
+      }
+    }
+    case "increment": {
+      const cartItem = draft.items.find(
+        (item) => item.id === action.payload,
+      ) as CartProduct;
+      cartItem.quantity++;
+
+      break;
+    }
+    case "decrement": {
+      const cartItem = draft.items.find(
+        (item) => item.id === action.payload,
+      ) as CartProduct;
+      cartItem.quantity--;
+      break;
+    }
+    case "remove": {
+      draft.items = draft.items.filter((item) => item.id !== action.payload);
+      break;
+    }
+    case "clear": {
+      draft.items = [];
+      break;
+    }
+    default: {
+      const _exhaustiveCheck:never = action.type;
+      throw new Error(`Action_type: "${action.type}" is not yet implemented!`);
+    }
+  }
 }
 
+// create the cart context
 const CartContext = createContext<{
-	state: CartState;
-	dispatch: ActionDispatch<[action: CartActions]>;
+  cart: CartState;
+ cartDispatch: ActionDispatch<[action: CartActions]>;
 } | null>(null);
 
+/* Wraps a child/children components and
+provides them with valid cart context */
 export function CartProvider({ children }: { children: ReactNode }) {
-	const [state, dispatch] = useReducer(cartReducer, initialState);
+  const [cart, cartDispatch] = useImmerReducer(cartReducer, initialCart);
 
-	return (
-		<CartContext.Provider value={{ state, dispatch }}>
-			{children}
-		</CartContext.Provider>
-	);
+  return (
+    <CartContext.Provider value={{ cart,cartDispatch }}>
+      {children}
+    </CartContext.Provider>
+  );
 }
 
+// custom hook to validate cart context
 export function useCart() {
-	const context = useContext(CartContext);
-	if (context === null) {
-		throw new Error("useCart must be used inside CartProvider");
-	}
+  const context = useContext(CartContext);
+  if (context === null) {
+    throw new Error("useCart must be used inside CartProvider");
+  }
 
-	return context;
+  return context;
 }
