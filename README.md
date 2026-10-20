@@ -4,7 +4,7 @@ A robust, type-safe shopping cart application built to demonstrate advanced glob
 
 ## 🚀 Features
 
-- **Global State:** Powered by React Context API and `useReducer` to manage cart actions seamlessly.
+- **Global State:** React Context API and `useImmerReducer` manage cart actions with concise, immutable updates.
 - **Type Safety:** Full TypeScript implementation ensuring reliable compile-time data structures.
 - **Local Currency:** Formatted beautifully with native currency localization (NGN/₦).
 - **Smooth UX:** Micro-interactions and animated "Add to Cart" states using Lucide icons and Tailwind CSS.
@@ -36,7 +36,7 @@ A robust, type-safe shopping cart application built to demonstrate advanced glob
 - **Framework:** React (via Vite)
 - **Language:** TypeScript (for strict type safety)
 - **Package Manager:** Bun
-- **State Management:** `useReducer`
+- **State Management:** React Context API, `useImmerReducer`, and Immer
 - **Icons:** Lucide React
 - **Styling:** Tailwind CSS
 
@@ -46,7 +46,7 @@ A robust, type-safe shopping cart application built to demonstrate advanced glob
 
 - **Visual Comparison:** Contrast the exact differences between prop drilling and Context API.
 - **Type-Safe Architecture:** Strict TypeScript integration across the entire state lifecycle.
-- **Predictable State:** Clean, action-based state transitions powered by `useReducer`.
+- **Predictable State:** Clean, action-based state transitions powered by `useImmerReducer` and Immer, while keeping updates immutable.
 
 ---
 
@@ -80,4 +80,4 @@ Ensure you have [Bun](https://bun.sh) installed on your machine.
 
 ### 🔮 Project Roadmap
 
-- [ ] **v2.0 Release:** Implement the [Immer](https://github.io) state management library to handle complex, immutable state mutations even more effortlessly.
+- [x] **Immer state management:** Use [`useImmerReducer`](https://github.com/immerjs/use-immer) to make cart state updates easier to write while preserving immutability.
