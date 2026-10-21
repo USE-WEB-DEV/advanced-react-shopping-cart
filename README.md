@@ -1,5 +1,11 @@
 # React TS Shopping Cart
 
+[![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Immer](https://img.shields.io/badge/Immer-00E7C3?logo=immer&logoColor=white)](https://immerjs.github.io/immer/)
+
 A robust, type-safe shopping cart application built to demonstrate advanced global state management in React.
 
 ## 🚀 Features
