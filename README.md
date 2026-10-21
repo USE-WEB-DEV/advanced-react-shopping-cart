@@ -8,6 +8,55 @@
 
 A robust, type-safe shopping cart application built to demonstrate advanced global state management in React.
 
+## 📁 Project Structure
+
+```text
+advanced-react-shopping-cart/
+├── .gitignore
+├── .oxlintrc.json
+├── .prettierrc.json
+├── CHANGELOG.md
+├── README.md
+├── biome.json
+├── bun.lock
+├── codebook.toml
+├── index.html
+├── package.json
+├── public/
+│   ├── favicon.svg
+│   └── icons.svg
+├── src/
+│   ├── App.css
+│   ├── App.tsx
+│   ├── App2.tsx
+│   ├── index.css
+│   ├── main.tsx
+│   ├── assets/
+│   │   ├── hero.png
+│   │   ├── react.svg
+│   │   └── vite.svg
+│   ├── components/
+│   │   ├── Cart.tsx
+│   │   ├── Dashboard.tsx
+│   │   ├── Footer.tsx
+│   │   ├── ProductList.tsx
+│   │   ├── ThemeButton.tsx
+│   │   └── snippets.tsx
+│   ├── contexts/
+│   │   ├── CartContext.tsx
+│   │   └── ThemeContext.tsx
+│   ├── hooks/
+│   │   └── useTheme.tsx
+│   └── utilities/
+│       └── currency-formater.ts
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+├── useContext.tsx
+├── vite.config.ts
+└── README.md
+```
+
 ## 🚀 Features
 
 - **Global State:** React Context API and `useImmerReducer` manage cart actions with concise, immutable updates.
