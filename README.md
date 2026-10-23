@@ -8,7 +8,34 @@
 
 A robust, type-safe shopping cart application built to demonstrate advanced global state management in React.
 
-## 📁 Project Structure
+## Overview
+
+This project explores a practical, production-minded approach to React state management with React Context API, `useImmerReducer`, and Immer. It is designed for a clean developer experience: predictable updates, strong typing, and a user-friendly shopping flow.
+
+The app includes product browsing, cart summaries, quantity controls, and a responsive interface that keeps the customer journey simple and easy to reason about.
+
+## Features
+
+- Product browsing with a clean storefront layout
+- Global cart state powered by Context API
+- Immutable updates using `useImmerReducer` and Immer
+- Type-safe state and actions with TypeScript
+- Localized currency formatting for the Nigerian Naira (`₦`)
+- Responsive UI with a polished shopping-cart flow
+- Lightweight, modern front-end architecture with Vite
+
+## Tech Stack
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Immer
+- `useImmerReducer`
+- Lucide React
+- Bun
+
+## Project Structure
 
 ```text
 advanced-react-shopping-cart/
@@ -57,82 +84,68 @@ advanced-react-shopping-cart/
 └── README.md
 ```
 
-## 🚀 Features
+## Getting Started
 
-- **Global State:** React Context API and `useImmerReducer` manage cart actions with concise, immutable updates.
-- **Type Safety:** Full TypeScript implementation ensuring reliable compile-time data structures.
-- **Local Currency:** Formatted beautifully with native currency localization (NGN/₦).
-- **Smooth UX:** Micro-interactions and animated "Add to Cart" states using Lucide icons and Tailwind CSS.
+### Prerequisites
 
-## 🛠️ Tech Stack
+Ensure you have [Bun](https://bun.sh/) installed on your machine.
 
-- **Runtime:** Bun
-- **Framework:** React + TypeScript
-- **Icons:** Lucide React
-- **Styling:** Tailwind CSS
+### Installation
 
-> [!NOTE]
-> Managing state in deeply nested components can quickly become messy. This repository serves as a clear, comparative showcase of how Context API simplifies data flow across a component subtree.
+1. Clone the repository:
 
----
+```bash
+git clone https://github.com/humbleUSE/advanced-react-shopping-cart.git
+cd advanced-react-shopping-cart
+```
 
-### 📊 Quick Comparison
+2. Install dependencies:
 
-| Feature                | Prop Drilling Approach                                                   | Context API Approach                                           |
-| :--------------------- | :----------------------------------------------------------------------- | :------------------------------------------------------------- |
-| **Data Flow**          | Passed manually down through every intermediate component level.         | Broadcasted globally to the entire component subtree.          |
-| **Component Coupling** | High. Intermediate components must know about props they don't use.      | Low. Components only consume the state they actually need.     |
-| **Maintainability**    | Difficult. Changing a prop shape requires updates across multiple files. | Easy. State changes are isolated to the Provider and Consumer. |
+```bash
+bun install
+```
 
----
+3. Start the development server:
 
-### 💻 Core Tech Stack
+```bash
+bun run dev
+```
 
-- **Framework:** React (via Vite)
-- **Language:** TypeScript (for strict type safety)
-- **Package Manager:** Bun
-- **State Management:** React Context API, `useImmerReducer`, and Immer
-- **Icons:** Lucide React
-- **Styling:** Tailwind CSS
+## Why This Project Matters
 
----
+Managing state in deeply nested React applications can become difficult very quickly. This repository is a clear example of how Context API reduces prop-drilling friction while preserving predictable, centralized state management.
 
-### ✨ Key Features
+The project focuses on the practical benefits of:
 
-- **Visual Comparison:** Contrast the exact differences between prop drilling and Context API.
-- **Type-Safe Architecture:** Strict TypeScript integration across the entire state lifecycle.
-- **Predictable State:** Clean, action-based state transitions powered by `useImmerReducer` and Immer, while keeping updates immutable.
+- cleaner component boundaries
+- more maintainable state ownership
+- easier global updates for cart actions
+- improved developer ergonomics without losing immutability guarantees
 
----
+## Comparison
 
-### 🛠️ Getting Started
+| Feature | Prop Drilling Approach | Context API Approach |
+| --- | --- | --- |
+| Data flow | Passed manually through multiple component levels | Shared globally within the subtree |
+| Component coupling | Higher | Lower |
+| Maintainability | Harder to scale | Easier to maintain |
+| State updates | More brittle | More centralized and predictable |
 
-#### Prerequisites
+## Roadmap
 
-Ensure you have [Bun](https://bun.sh) installed on your machine.
+- [x] Global cart state with Context API
+- [x] Immutable state updates with `useImmerReducer`
+- [x] Type-safe product and cart data modeling
+- [x] Product browsing and cart controls
+- [ ] Improved cart persistence
+- [ ] Checkout flow and order summary
+- [ ] Product detail page
+- [ ] Accessibility review and polish
 
-#### Installation
+## License
 
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/USE-WEB-DEV/advanced-react-shopping-cart.git
-   cd advanced-react-shopping-cart
-   ```
-
-2. **Install dependencies:**
-
-   ```bash
-   bun install
-   ```
-
-3. **Start the development server:**
-   ```bash
-   bun run dev
-   ```
+This project currently has no license configured.
 
 ---
 
-### 🔮 Project Roadmap
-
-- [x] **Immer state management:** Use [`useImmerReducer`](https://github.com/immerjs/use-immer) to make cart state updates easier to write while preserving immutability.
+Built as a practical React state-management example for frontend development and portfolio demonstration.
